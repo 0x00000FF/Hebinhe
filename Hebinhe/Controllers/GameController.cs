@@ -13,7 +13,7 @@ namespace Hebinhe.Controllers
     public class GameController : ControllerBase
     {
         [HttpGet]
-        public ActionResult<dynamic> Get()
+        public ActionResult<GameModel> Get()
         {
             using (var rng = RandomNumberGenerator.Create()) {
                 var buff = new byte[2];
@@ -21,12 +21,17 @@ namespace Hebinhe.Controllers
 
                 var select = new byte[2] { 2, 16 }[(buff[0] + buff[1]) % 2];
 
-                return new { type=select, value=BitConverter.ToUInt16(buff) };
+                return new GameModel()
+                {
+                    type = select,
+                    value = BitConverter.ToUInt16(buff),
+                    answer = null
+                };
             }
         }
 
         [HttpPost]
-        public ActionResult<bool> Post([FromBody]AnswerModel answer)
+        public ActionResult<bool> Post([FromBody]GameModel answer)
         {
             try
             {

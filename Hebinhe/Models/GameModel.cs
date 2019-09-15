@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace Hebinhe.Models
 {
-    public class AnswerModel
+    public class GameModel
     {
         public int type { get; set; }
         public uint value { get; set; }
